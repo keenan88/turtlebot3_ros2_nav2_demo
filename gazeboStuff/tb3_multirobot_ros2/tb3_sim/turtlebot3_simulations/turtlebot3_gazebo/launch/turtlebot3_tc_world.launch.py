@@ -42,7 +42,7 @@ def generate_launch_description():
     robot_desc_path = os.path.join(get_package_share_directory("turtlebot3_description"), "urdf", "turtlebot3_burger.urdf")
 
     entity_name_0=""
-    entity_name = 'asdf'
+    entity_name = 'tb3_0'
 
     return LaunchDescription([
         ExecuteProcess(

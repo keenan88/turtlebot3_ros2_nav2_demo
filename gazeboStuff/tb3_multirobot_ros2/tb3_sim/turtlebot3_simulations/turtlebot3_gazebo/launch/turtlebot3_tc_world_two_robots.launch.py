@@ -29,7 +29,12 @@ from launch_ros.actions import Node
 from launch.substitutions import Command
 
 
-TURTLEBOT3_MODEL = "burger"
+
+os.environ['TURTLEBOT3_MODEL'] = 'burger'
+TURTLEBOT3_MODEL = os.environ['TURTLEBOT3_MODEL']
+
+os.environ['GAZEBO_MODEL_PATH'] = os.path.join(get_package_share_directory('turtlebot3_gazebo'), 'models')
+
 
 def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
@@ -44,7 +49,7 @@ def generate_launch_description():
         ExecuteProcess(
             cmd=['gazebo', '--verbose', world, '-s', 'libgazebo_ros_init.so'],
             output='screen'),
-        
+
         Node(
             package='robot_state_publisher',
             executable='robot_state_publisher',
