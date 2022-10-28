@@ -39,13 +39,13 @@ tb3_0/amcl:
     z_short: 0.05
     scan_topic: "scan"
     map_topic: "/map"
-    # ACTIVATE THE set_initial_pose WHEN YOU HAVE A PROPER initial_pose, by uncommenting the code below
-    #set_initial_pose: true
-    #initial_pose:
-    # x: 7.778
-    # y: -9.589
-    # z: 0.0
-    # a: -0.211
+    set_initial_pose: true
+    initial_pose: 
+      x: 0.0 
+      y: 0.0
+      z: 0.0
+      yaw: 0.0
+
 
 tb3_0/amcl_map_client:
   ros__parameters:
