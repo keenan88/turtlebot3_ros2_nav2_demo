@@ -1,0 +1,28 @@
+FROM osrf/ros:galactic-desktop
+
+# use bash instead of sh
+SHELL ["/bin/bash", "-c"]
+ENV DEBIAN_FRONTEND=noninteractive
+
+# install dependencies
+RUN apt-get update && apt-get install --yes python3-pip
+
+RUN apt-get update \
+ && apt-get install -y gnome-terminal
+
+# create workspace
+RUN mkdir -p /ros2_ws/src
+WORKDIR /ros2_ws
+
+COPY ../ /ros2_ws/src
+
+RUN colcon build; source install/setup.bash;
+RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc \
+&& source ~/.bashrc
+
+RUN cd /ros2_ws; apt-get update && apt-get upgrade -y && rosdep update && rosdep install --from-path src --ignore-src -y
+
+
+
+#ADD ./Scripts/tb3_nav2demo_container-start.sh /container-start.sh
+#RUN chmod +x /container-start.sh
